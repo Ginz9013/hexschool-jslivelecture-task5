@@ -517,6 +517,10 @@ video {
  * Ensure the default browser behavior of the `hidden` attribute.
  */
 
+[hidden] {
+  display: none;
+}
+
 *, ::before, ::after {
   --tw-border-opacity: 1;
   border-color: rgba(229, 231, 235, var(--tw-border-opacity));
@@ -597,6 +601,10 @@ video {
 
 .grid {
   display: grid;
+}
+
+.hidden {
+  display: none;
 }
 
 .w-10 {
@@ -781,6 +789,10 @@ video {
 .hover\:bg-primaryColor-dark:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(0, 117, 114, var(--tw-bg-opacity));
+}
+
+.object-cover {
+  object-fit: cover;
 }
 
 .px-2 {

@@ -37,7 +37,7 @@
         <!-- 套票名稱 -->
         <div class="flex items-center mb-4">
           <label for="tikketName" class="whitespace-nowrap mr-8">套票名稱</label>
-          <input type="text" name="tikketName" id="tikketName" placeholder="請填寫套票名稱"
+          <input type="text" name="tikketName" id="tikketName" -text="請填寫套票名稱"
             class="tikketName border-b border-primaryColor w-full outline-none bg-gray-100 px-2 py-1 placeholder-text-sm">
         </div>
         <!-- 圖片網址 -->
@@ -110,32 +110,34 @@
       <!-- 旅遊卡資料顯示 -->
       <div class="cardArea grid grid-cols-3 gap-x-6 gap-y-10 pt-14 pb-32">
 
-        <!-- Card -->
-        <!-- <div class="relative rounded-xl shadow-md">
+        <!-- 卡片樣板，儲存 Tailwind Class用，目前不會處理 -->
+        <div class="hidden relative rounded-xl shadow-md">
           <h3 class="bg-primaryColor-light text-white px-5 py-2 w-24  text-lg text-center rounded-r-lg absolute -top-5">
             台北
           </h3>
-          <img src="./assets/images/photo-1477894387642-00a731c511b3.png" alt="Lyudao" class="w-full rounded-t-lg">
-          <p class="bg-primaryColor-dark w-10 text-white text-center rounded px-2 absolute top-44">8.6</p>
+          <img src="${item.imgUrl}" alt="${item.area}" class="w-full h-190 object-cover rounded-t-lg">
+          <p class="bg-primaryColor-dark w-10 text-white text-center rounded px-2 absolute top-44">9</p>
           <div class="rounded-b-lg">
-            <div class="pt-5 pb-4 px-7">
-              <h4 class="text-2xl text-priamryColor border-b-4 border-primaryColor leading-10 mb-4">綠島自由行套裝行程</h4>
-              <p class="text-gray-500 leading-7 mb-8">
-                嚴選超高CP值綠島自由行套裝行程，多種綠島套裝組合，提供台東綠島來回船票、綠島環島機車、綠島民宿住宿，行程加贈『綠島浮潛體驗』以及『綠島生態導覽』，讓你用輕鬆的綠島套裝自由行，也能深度認識綠島在地文化。
-              </p>
+            <div class="flex flex-col justify-between  h-336 pt-5 pb-4 px-7">
+              <div>
+                <h4 class="text-2xl text-priamryColor border-b-4 border-primaryColor leading-10 mb-4">肥宅朝聖旅</h4>
+                <p class="text-gray-500 leading-7 mb-8">
+                  安安肥宅
+                </p>
+              </div>
               <div class="flex justify-between items-center text-primaryColor font-medium">
                 <p>
                   <i class="fas fa-exclamation-circle mr-1"></i>
-                  剩下最後 8 組
+                  剩下最後 87 組
                 </p>
                 <div class="flex items-center text-primary-Color">
                   <p class="mr-1">TWD</p>
-                  <h5 class="text-4xl">$1,280</h5>
+                  <h5 class="text-4xl">9999</h5>
                 </div>
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
 

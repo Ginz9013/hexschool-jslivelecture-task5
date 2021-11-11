@@ -1,17 +1,29 @@
 .placeholder-text-sm::-webkit-input-placeholder {
   font-size: 0.875rem;
 }
+
 .placeholder-text-sm::-moz-placeholder {
   font-size: 0.875rem;
 }
+
 .placeholder-text-sm:-ms-input-placeholder {
   font-size: 0.875rem;
 }
+
 .placeholder-text-sm::-ms-input-placeholder {
   font-size: 0.875rem;
 }
+
 .placeholder-text-sm::placeholder {
   font-size: 0.875rem;
+}
+
+.h-190 {
+  height: 190px;
+}
+
+.h-336 {
+  height: 336px;
 }
 
 /*# sourceMappingURL=all.css.map */
