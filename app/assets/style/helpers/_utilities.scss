@@ -1,0 +1,13 @@
+@layer utilities {
+  .placeholder-text-sm::placeholder{
+    font-size:0.875rem;
+  }
+
+  .h-190{
+    height: 190px;
+  }
+
+  .h-336{
+    height: 336px;
+  }
+}
