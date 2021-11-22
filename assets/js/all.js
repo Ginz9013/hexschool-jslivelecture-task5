@@ -1,33 +1,11 @@
 "use strict";
 
-var data = [{
-  "id": 0,
-  "name": "肥宅心碎賞櫻3日",
-  "imgUrl": "https://images.unsplash.com/photo-1522383225653-ed111181a951?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1655&q=80",
-  "area": "高雄",
-  "description": "賞櫻花最佳去處。肥宅不得不去的超讚景點！",
-  "group": 87,
-  "price": 1400,
-  "rate": 10
-}, {
-  "id": 1,
-  "name": "貓空纜車雙程票",
-  "imgUrl": "https://images.unsplash.com/photo-1501393152198-34b240415948?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-  "area": "台北",
-  "description": "乘坐以透明強化玻璃為地板的「貓纜之眼」水晶車廂，享受騰雲駕霧遨遊天際之感",
-  "group": 99,
-  "price": 240,
-  "rate": 2
-}, {
-  "id": 2,
-  "name": "台中谷關溫泉會1日",
-  "imgUrl": "https://images.unsplash.com/photo-1535530992830-e25d07cfa780?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-  "area": "台中",
-  "description": "全館客房均提供谷關無色無味之優質碳酸原湯，並取用八仙山之山冷泉供蒞臨貴賓沐浴及飲水使用。",
-  "group": 20,
-  "price": 1765,
-  "rate": 7
-}]; //  選取下方卡片資料區
+var data = []; // Axios
+
+axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json').then(function (response) {
+  data = response.data.data;
+  init();
+}); //  選取下方卡片資料區
 
 var cardArea = document.querySelector(".cardArea"); // 選取篩選資料筆數
 
@@ -51,11 +29,10 @@ function init() {
   cardArea.innerHTML = cards; // 把 amount 累積計算後的筆數修改到html上
 
   filterNum.innerHTML = "\u672C\u6B21\u7BE9\u9078\u5171 ".concat(amount, " \u7B46\u8CC7\u6599");
-}
+} // ---下方篩選器---
 
-init(); // ---下方篩選器---
 
-var filter = document.querySelector('#filter'); //  第 1 層 監聽
+var filter = document.querySelector('#filter'); //  Filter 篩選器 - 第 1 層 監聽
 
 filter.addEventListener('change', function (e) {
   // 卡片資料區初始化
@@ -101,17 +78,21 @@ btn.addEventListener('click', function (e) {
     obj.name = tikketName.value;
     obj.imgUrl = imgUrl.value;
     obj.area = area.value;
-    obj.price = price.value;
-    obj.group = group.value;
-    obj.rate = rate.value;
+    obj.price = parseInt(price.value);
+    obj.group = parseInt(group.value);
+    obj.rate = parseInt(rate.value);
     obj.description = description.value; // 把建立好的 obj 物件 push 到 data陣列資料裡面
 
     data.push(obj); // 再次執行初始化，重新跑過 data內的資料，然後渲染 HTML
 
-    init();
+    init(); // 重置filter到全部地區
+
+    filter.value = filter.options[1].value;
   } else {
     // 星級錯誤
     alert('星級填寫錯誤');
+    event.preventDefault();
+    return;
   } // 重置輸入欄位的值
 
 
