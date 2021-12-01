@@ -6,6 +6,7 @@ axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelAp
     data = response.data.data;
 
     init();
+    c3Chart();
   })
 
 
@@ -71,6 +72,11 @@ function init() {
 
 // ---下方篩選器---
 const filter = document.querySelector('#filter');
+
+// 卡片內容樣板，拉出來到全域環境
+function cardContent(item) {
+
+}
 
 //  Filter 篩選器 - 第 1 層 監聽
 filter.addEventListener('change', function (e) {
@@ -168,6 +174,9 @@ btn.addEventListener('click', function (e) {
     // 再次執行初始化，重新跑過 data內的資料，然後渲染 HTML
     init();
 
+    // 重新跑過C3.js圖表
+    c3Chart();
+
     // 重置filter到全部地區
     filter.value = filter.options[1].value;
 
@@ -191,3 +200,50 @@ btn.addEventListener('click', function (e) {
   // 取消input type=submit 原本預設的 post 行為
   event.preventDefault();
 })
+
+function c3Chart() {
+  // 篩選資料
+
+  let newObj = {};
+  data.forEach(function (item) {
+    if (newObj[item.area] == undefined) {
+      newObj[item.area] = 1;
+    } else {
+      newObj[item.area] += 1;
+    }
+  });
+
+
+  // 處理資料
+  let newData = [];
+  let area = Object.keys(newObj);
+  area.forEach(function (item) {
+    let arr = [];
+    arr.push(item);
+    arr.push(newObj[item]);
+    newData.push(arr);
+  });
+
+
+  // 套入C3.js
+  let chart = c3.generate({
+    bindto: '#chart',
+    data: {
+      columns: newData,
+      type: "donut",
+      colors: {
+        "台北": "#00807E",
+        "台中": "#64C3BF",
+        "高雄": "#007572",
+      }
+    },
+    donut: {
+      title: "套票地區比重",
+      label: {
+        show: false
+      },
+      padAngle: .03,
+      width: 20
+    }
+  });
+};
