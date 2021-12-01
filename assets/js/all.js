@@ -5,6 +5,7 @@ var data = []; // Axios
 axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json').then(function (response) {
   data = response.data.data;
   init();
+  c3Chart();
 }); //  選取下方卡片資料區
 
 var cardArea = document.querySelector(".cardArea"); // 選取篩選資料筆數
@@ -32,7 +33,10 @@ function init() {
 } // ---下方篩選器---
 
 
-var filter = document.querySelector('#filter'); //  Filter 篩選器 - 第 1 層 監聽
+var filter = document.querySelector('#filter'); // 卡片內容樣板，拉出來到全域環境
+
+function cardContent(item) {} //  Filter 篩選器 - 第 1 層 監聽
+
 
 filter.addEventListener('change', function (e) {
   // 卡片資料區初始化
@@ -85,7 +89,9 @@ btn.addEventListener('click', function (e) {
 
     data.push(obj); // 再次執行初始化，重新跑過 data內的資料，然後渲染 HTML
 
-    init(); // 重置filter到全部地區
+    init(); // 重新跑過C3.js圖表
+
+    c3Chart(); // 重置filter到全部地區
 
     filter.value = filter.options[1].value;
   } else {
@@ -106,4 +112,48 @@ btn.addEventListener('click', function (e) {
 
   event.preventDefault();
 });
+
+function c3Chart() {
+  // 篩選資料
+  var newObj = {};
+  data.forEach(function (item) {
+    if (newObj[item.area] == undefined) {
+      newObj[item.area] = 1;
+    } else {
+      newObj[item.area] += 1;
+    }
+  }); // 處理資料
+
+  var newData = [];
+  var area = Object.keys(newObj);
+  area.forEach(function (item) {
+    var arr = [];
+    arr.push(item);
+    arr.push(newObj[item]);
+    newData.push(arr);
+  }); // 套入C3.js
+
+  var chart = c3.generate({
+    bindto: '#chart',
+    data: {
+      columns: newData,
+      type: "donut",
+      colors: {
+        "台北": "#00807E",
+        "台中": "#64C3BF",
+        "高雄": "#007572"
+      }
+    },
+    donut: {
+      title: "套票地區比重",
+      label: {
+        show: false
+      },
+      padAngle: .03,
+      width: 20
+    }
+  });
+}
+
+;
 //# sourceMappingURL=all.js.map
